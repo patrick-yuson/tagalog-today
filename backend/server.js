@@ -42,6 +42,23 @@ app.get('/api/words', async (req, res) => {
     }
 })
 
+// Get by ID
+app.get('/api/words/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('SELECT * FROM ph_words WHERE id = $1', [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Word not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error('Error fetching word by ID:', err);
+        res.status(500).json({ error: err.message });
+    }
+})
+
 // Get by Letter
 app.get('/api/words/letter/:letter', async (req, res) => {
     try {
