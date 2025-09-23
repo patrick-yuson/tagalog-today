@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark, caramellatte;
+}
+@pluging "daisyui/theme" {
+    name: "caramellatte";
+    default: true;
+    --color-primary: var(--color-neutral);
+}
